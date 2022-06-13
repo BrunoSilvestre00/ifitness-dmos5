@@ -1,6 +1,6 @@
 # ifitness-dmos5
 
-Projeto Final de DMOS5 - Bianca Seolin e Bruno Silvestre.
+<h1> Projeto Final de DMOS5 - Bianca Seolin</span> e Bruno Silvestre. </h1>
 
 Este aplicativo tem como intuito de gerenciar as seguintes atividades: caminhada, ciclismo, corrida e natação, 
 além disso apresente um recurso de gamificação para que incetive os usuários a prática de atividades físicas.
