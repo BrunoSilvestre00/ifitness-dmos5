@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:id="@+id/nav_home"
+        android:title="Home"
+        android:icon="@drawable/ic_menu_home"/>
+
+    <item android:id="@+id/nav_account"
+        android:title="Minha conta"
+        android:icon="@drawable/ic_menu_account"/>
+    <item android:id="@+id/nav_activity"
+        android:title="Minhas atividades"
+        android:icon="@drawable/ic_menu_activity"/>
+
+    <item android:id="@+id/nav_statitics"
+        android:title="Estatísticas"
+        android:icon="@drawable/ic_menu_statistic"/>
+
+    <item android:id="@+id/nav_ranking"
+        android:title="Classificação"
+        android:icon="@drawable/ic_menu_ranking"/>
+
+    <item android:id="@+id/nav_logout"
+        android:title="Sair"
+        android:icon="@drawable/ic_menu_exit"/>
+
+</menu>
