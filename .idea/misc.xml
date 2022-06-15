@@ -5,6 +5,10 @@
       <map>
         <entry key="..\:/Users/Bruno Silvestre/AndroidStudioProjects/Projeto Final DMOS5/ifitness-dmos5/app/src/main/res/layout/activity_splash.xml" value="0.1762917933130699" />
         <entry key="..\:/Users/Bruno Silvestre/AndroidStudioProjects/Projeto Final DMOS5/ifitness-dmos5/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.134" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/activity_sing_up.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/menu_toolbar_layout.xml" value="0.35520833333333335" />
       </map>
     </option>
   </component>

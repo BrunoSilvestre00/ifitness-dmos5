@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ifitness-dmos5</string>
+
+    <!-- Tela Cadastro de usuário -->
+    <string name="singUp_name">Nome</string>
+    <string name="singUp_sexo">Sexo</string>
+    <string name="singUp_data">Data de nascimento</string>
+    <string name="singUp_telefone">Telefone</string>
+    <string name="singUp_email">Email</string>
+    <string name="singUp_senha">Senha</string>
+    <string name="singUp_button_cadastrar">Cadastrar</string>
+
+
 </resources>
