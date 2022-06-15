@@ -10,5 +10,9 @@
     <string name="singUp_senha">Senha</string>
     <string name="singUp_button_cadastrar">Cadastrar</string>
 
+    <!-- Tela Principal -->
+    <string name="toogle_open">Open</string>
+    <string name="toogle_close">Close</string>
+
 
 </resources>
