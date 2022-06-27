@@ -1,27 +1,38 @@
 package br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 
+@Entity(tableName = "activity_history")
 public class ActivityHistory implements Serializable {
 
     @NonNull
+    @PrimaryKey
     private String id;
+    private String userID;
     private Atividades type;
-    private User user;
     private double distance, duration;
-    private Date date;
+    private String date;
 
-    public ActivityHistory(Atividades type, User user, double distance, double duration, Date date) {
+    public ActivityHistory(String userID, Atividades type, double distance, double duration, String date) {
         this.id = UUID.randomUUID().toString();
+        this.userID = userID;
         this.type = type;
-        this.user = user;
         this.distance = distance;
         this.duration = duration;
         this.date = date;
+    }
+
+    @Ignore
+    public ActivityHistory(){
+        this("", Atividades.CAMINHADA, 0, 0, "");
     }
 
     @NonNull
@@ -33,20 +44,20 @@ public class ActivityHistory implements Serializable {
         this.id = id;
     }
 
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
     public Atividades getType() {
         return type;
     }
 
     public void setType(Atividades type) {
         this.type = type;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public double getDistance() {
@@ -65,11 +76,24 @@ public class ActivityHistory implements Serializable {
         this.duration = duration;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ActivityHistory activityHistory = (ActivityHistory) o;
+        return id.equals(activityHistory.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +14,13 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Date;
 
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.R;
+import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.User;
+import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.viewmodel.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,11 +28,15 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
+    private UserViewModel userViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -75,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        User user = new User("Bruno", "bruno@email.com", "123456", new Date().toString(), "male", "(xx) 9xxxx-xxxx", "", 1,2,3,4);
+
+        userViewModel.createUser(user);
     }
 
     @Override
