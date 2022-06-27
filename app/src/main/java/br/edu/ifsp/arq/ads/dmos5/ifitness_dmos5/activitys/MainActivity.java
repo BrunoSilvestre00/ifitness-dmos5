@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
                         // colocar validações aqui
                         break;
                     case R.id.nav_ranking:
-                        //colocar validações aqui
+                        intent = new Intent(MainActivity.this, RankingActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.nav_logout:
                         //colocar validações aqui
