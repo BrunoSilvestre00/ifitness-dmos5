@@ -36,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        //userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -86,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*User user = new User("Bruno", "bruno@email.com", "123456", new Date().toString(), "male", "(xx) 9xxxx-xxxx", "", 1,2,3,4);
+        User user = new User("Bruno", "bruno@email.com", "123456", new Date().toString(), "male", "(xx) 9xxxx-xxxx", "", 1,2,3,4);
 
-        userViewModel.createUser(user);*/
+        userViewModel.createUser(user);
     }
 
     @Override

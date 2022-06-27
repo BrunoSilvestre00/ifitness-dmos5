@@ -38,8 +38,8 @@ public class UserViewModel extends AndroidViewModel {
         usersRepository.createUsuario(user);
     }
 
-    public void update(UserHasActivity usuarioComEndereco){
-        usersRepository.update(usuarioComEndereco);
+    public void update(UserHasActivity usersActivitys){
+        usersRepository.update(usersActivitys);
     }
 
     public LiveData<User> login(String email, String password) {
