@@ -49,11 +49,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = null;
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-                        //validações aqui
                         break;
                     case R.id.nav_account:
-                        //intent = new Intent(MainActivity.this, .class);
-                        //startActivity(intent);
+                        intent = new Intent(MainActivity.this, ProfileActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.nav_activity:
                         // colocar aqui
