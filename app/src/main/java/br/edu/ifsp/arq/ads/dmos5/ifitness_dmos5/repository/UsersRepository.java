@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -65,7 +66,7 @@ public class UsersRepository {
         preference = PreferenceManager.getDefaultSharedPreferences(application);
     }
 
-    public void createUsuario(User user){
+    public void createUser(User user){
         JSONObject parametros = new JSONObject();
         try{
             parametros.put("email", user.getEmail());
@@ -88,7 +89,7 @@ public class UsersRepository {
                             user.setId(response.getString("localId"));
                             user.setPassword(response.getString("idToken"));
 
-                            firestore.collection("usuario")
+                            firestore.collection("user")
                                     .document(user.getId()).set(user)
                                     .addOnSuccessListener(unused -> {
                                         Log.d(this.toString(), "Usuário " +
@@ -102,7 +103,7 @@ public class UsersRepository {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(this.toString(), error.getMessage());
+                        Log.e("Deu pau esta merda", error.getMessage());
                     }
                 }
         );
@@ -130,7 +131,7 @@ public class UsersRepository {
                             String localId = response.getString("localId");
                             String idToken = response.getString("idToken");
 
-                            firestore.collection("usuario").document(localId).get().addOnSuccessListener(snapshot -> {
+                            firestore.collection("user").document(localId).get().addOnSuccessListener(snapshot -> {
                                 User user = snapshot.toObject(User.class);
 
                                 user.setId(localId);
@@ -138,9 +139,12 @@ public class UsersRepository {
 
                                 liveData.setValue(user);
 
-                                preference.edit().putString(UserViewModel.USUARIO_ID, localId).apply();
+                                preference.edit().putString(UserViewModel.USER_ID, localId).apply();
 
-                                firestore.collection("usuario").document(localId).set(user);
+                                String sid = preference.getString(UserViewModel.USER_ID, "kekw");
+                                Log.d("SID", "from login "+sid);
+
+                                firestore.collection("user").document(localId).set(user);
                             });
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -173,7 +177,6 @@ public class UsersRepository {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public LiveData<UserHasActivity> load(String userID){
         UserHasActivity userHasActivity = new UserHasActivity();
         MutableLiveData<UserHasActivity> liveData = new MutableLiveData<>();
@@ -183,8 +186,6 @@ public class UsersRepository {
         userRef.get().addOnSuccessListener(snapshot -> {
             User user = snapshot.toObject(User.class);
 
-            user.setId(user.getId());
-
             userHasActivity.setUser(user);
 
             userRef.collection("activity_history").get().addOnCompleteListener( snap -> {
@@ -193,27 +194,29 @@ public class UsersRepository {
                     activityHistory.setId(doc.getId());
                     userHasActivity.getActivitys().add(activityHistory);
                 });
+
                 liveData.setValue(userHasActivity);
+                Log.d("SID", "from load inside ref "+liveData.getValue().getUser().getName());
             });
         });
 
         return liveData;
     }
 
-    public LiveData<UserHasActivity> loadUsersActivitys(String usuarioId){
-        return dao.loadUsersActivitys(usuarioId);
+    public LiveData<UserHasActivity> loadUsersActivitys(String userID){
+        return dao.loadUsersActivitys(userID);
     }
 
     public Boolean update(UserHasActivity userHasActivity){
         final Boolean[] atualizado = {false};
 
-        DocumentReference usuarioRef = firestore.collection("user").document(userHasActivity.getUser().getId());
+        DocumentReference userRef = firestore.collection("user").document(userHasActivity.getUser().getId());
 
-        usuarioRef.set(userHasActivity.getUser()).addOnSuccessListener(unused -> {
+        userRef.set(userHasActivity.getUser()).addOnSuccessListener(unused -> {
             atualizado[0] = true;
         });
 
-        CollectionReference activityRef = usuarioRef.collection("activity_history");
+        CollectionReference activityRef = userRef.collection("activity_history");
 
         ActivityHistory activityHistory = userHasActivity.getActivitys().get(0);
 
