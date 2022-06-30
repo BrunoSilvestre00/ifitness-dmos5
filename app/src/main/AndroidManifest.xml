@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ifitnessdmos5">
         <activity
-            android:name=".LoginActivity"
+            android:name=".activitys.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.SportActivity"
             android:exported="false" />
         <activity
             android:name=".activitys.RankingActivity"

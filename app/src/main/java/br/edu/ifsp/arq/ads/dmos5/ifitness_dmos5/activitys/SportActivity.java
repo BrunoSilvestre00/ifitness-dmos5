@@ -8,8 +8,7 @@ import android.widget.TextView;
 
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.R;
 
-public class SingUpActivity extends AppCompatActivity {
-
+public class SportActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView txtTitulo;
@@ -17,7 +16,7 @@ public class SingUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sing_up);
+        setContentView(R.layout.activity_sport);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -26,12 +25,9 @@ public class SingUpActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         txtTitulo = findViewById(R.id.toolbar_titulo);
-        txtTitulo.setText("Cadastro");
+        txtTitulo.setText("Atividades");
 
-    }
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+
+
     }
 }
