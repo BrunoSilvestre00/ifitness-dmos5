@@ -162,8 +162,8 @@ public class User implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User usuario = (User) o;
-        return id.equals(usuario.id);
+        User user = (User) o;
+        return id.equals(user.id);
     }
 
     @Override
