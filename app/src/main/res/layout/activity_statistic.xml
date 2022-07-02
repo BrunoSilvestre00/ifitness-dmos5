@@ -17,13 +17,98 @@
             android:layout_height="?attr/actionBarSize" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ImageView
-        android:id="@+id/header_profile_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_menu_account"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:id="@+id/chevron_left"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@drawable/chevron_left"/>
 
 
+        <ImageView
+            android:id="@+id/badge"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:src="@drawable/badge_none_walk"/>
+
+        <ImageView
+            android:id="@+id/chevron_right"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@drawable/chevron_right"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:layout_margin="25dp"
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:background="@drawable/border_circular">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/activity_type"
+            android:textSize="40dp"
+            android:text="Atividade"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/activity_level"
+            android:textSize="20dp"
+            android:text="Nível: x"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/activity_distance"
+            android:textSize="20dp"
+            android:text="Distância Total: xx Km"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/activity_duration"
+            android:textSize="20dp"
+            android:text="Duração Total: xx min"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/activity_points"
+            android:textSize="20dp"
+            android:text="Pontuação: xx pts"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_usuario_entrar"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="Ranking Atividade"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton" />
+
+
+    </LinearLayout>
 
 </LinearLayout>
