@@ -3,10 +3,11 @@ package br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserHasActivity {
+public class UserHasActivity implements Serializable {
 
     @Embedded
     private User user;
@@ -66,19 +67,16 @@ public class UserHasActivity {
         return 0;
     }
 
-    public int getLevelWalk(){
-        return getLevel(Atividades.CAMINHADA, new int[]{0, 20, 40, 60, 120, 180});
-    }
-
-    public int getLevelRun(){
-        return getLevel(Atividades.CORRIDA, new int[]{0, 15, 25, 50, 100, 150});
-    }
-
-    public int getLevelCyclo(){
-        return getLevel(Atividades.CICLISMO, new int[]{0, 40, 80, 120, 200, 280});
-    }
-
-    public int getLevelSwim(){
-        return getLevel(Atividades.CAMINHADA, new int[]{0, 1, 2, 5, 10, 20});
+    public int getLevelActivity(Atividades activity){
+        switch (activity){
+            case CAMINHADA:
+                return getLevel(Atividades.CAMINHADA, new int[]{0, 20, 40, 60, 120, 180});
+            case CORRIDA:
+                return getLevel(Atividades.CORRIDA, new int[]{0, 15, 25, 50, 100, 150});
+            case CICLISMO:
+                return getLevel(Atividades.CICLISMO, new int[]{0, 40, 80, 120, 200, 280});
+            default:
+                return getLevel(Atividades.NATACAO, new int[]{0, 1, 2, 5, 10, 20});
+        }
     }
 }

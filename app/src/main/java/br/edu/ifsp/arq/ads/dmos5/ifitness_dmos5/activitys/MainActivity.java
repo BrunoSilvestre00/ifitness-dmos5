@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onChanged(UserHasActivity usersActivitys) {
                                 if(usersActivitys != null) {
                                     Intent intent = new Intent(MainActivity.this, StatisticActivity.class);
+                                    intent.putExtra("user", usersActivitys);
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(
@@ -175,8 +176,8 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityHistory activityHistory = new ActivityHistory(
                 user_id,
-                atividade,
-                distance,
+                Atividades.CICLISMO,
+                80,
                 duration,
                 date
         );
