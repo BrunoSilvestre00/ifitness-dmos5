@@ -41,27 +41,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/txt_layout_sexo"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:hint="@string/singUp_sexo">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txt_edit_sexo"
-                android:inputType="textCapWords"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:id="@+id/txt_layout_data"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
             android:hint="@string/singUp_data">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -70,23 +53,28 @@
                 android:inputType="date"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:id="@+id/sp_gender"
+            android:entries="@array/genders"
+            style="@style/Widget.AppCompat.Spinner.DropDown" />
+
     </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_layout_telephone"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_gray"
+        android:focusable="false"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="8dp"
-        android:hint="@string/singUp_telefone">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txt_edit_phone"
-            android:inputType="phone"/>
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_marginLeft="8dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -123,8 +111,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_usuario_cadastrae"
-        android:layout_marginTop="8dp"
+        android:id="@+id/btn_usuario_cadastrar"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:text="@string/singUp_button_cadastrar"

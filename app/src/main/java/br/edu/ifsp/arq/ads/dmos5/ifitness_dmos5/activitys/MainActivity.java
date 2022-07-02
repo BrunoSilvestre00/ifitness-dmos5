@@ -11,8 +11,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.service.notification.NotificationListenerService;
 import android.util.Log;
 import android.view.MenuItem;
@@ -79,19 +81,40 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.nav_activity:
-                        // colocar aqui
+                        userViewModel.isLogged().observe(MainActivity.this, new Observer<UserHasActivity>() {
+                            @Override
+                            public void onChanged(UserHasActivity userHasActivity) {
+                                userHasActivity.getActivitys()
+                                        .add(buildActivityHistory(userHasActivity
+                                                .getUser().getId()));
+                                userViewModel.update(userHasActivity);
+                            }
+                        });
                         break;
                     case R.id.nav_statitics:
-                        // colocar validações aqui
+                        userViewModel.isLogged().observe(MainActivity.this, new Observer<UserHasActivity>() {
+                            @Override
+                            public void onChanged(UserHasActivity usersActivitys) {
+                                if(usersActivitys != null) {
+                                    Intent intent = new Intent(MainActivity.this, StatisticActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(
+                                            MainActivity.this,
+                                            "Você precisa estar logado\npara acessar as Estatísticas",
+                                            Toast.LENGTH_LONG
+                                    ).show();
+                                }
+                            }
+                        });
                         break;
                     case R.id.nav_ranking:
                         intent = new Intent(MainActivity.this, RankingActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.nav_logout:
-                        //colocar validações aqui
-                        finish();
-
+                        userViewModel.logout();
+                        txtLogin.setText(R.string.enter);
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
@@ -107,45 +130,20 @@ public class MainActivity extends AppCompatActivity {
                 userViewModel.isLogged().observe(MainActivity.this, new Observer<UserHasActivity>() {
                     @Override
                     public void onChanged(UserHasActivity usersActivitys) {
-                        /*ActivityHistory a = buildActivityHistory(usersActivitys.getUser().getId());
-                        Toast.makeText(MainActivity.this, a.toString(), Toast.LENGTH_LONG).show();
-                        usersActivitys.getActivitys().add(a);
-                        userViewModel.update(usersActivitys);*/
-                        Toast.makeText(MainActivity.this, String.format("Pontos: %d", usersActivitys.getLevelRun()), Toast.LENGTH_LONG).show();
+                        if(usersActivitys == null) {
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(
+                                    MainActivity.this,
+                                    String.format("%s já está logado!", usersActivitys.getUser().getName()),
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        }
                     }
                 });
             }
         });
-
-
-        /*User user = new User(
-                "Bruno Silvestre",
-                "bruno.silvestre@aluno.ifsp.edu.br",
-                "12345678",
-                "28/05/2002",
-                "male",
-                "(14) 98824-6613",
-                ""
-        );
-
-        userViewModel.createUser(user);*/
-
-        userViewModel.logout();
-
-        userViewModel.login("bruno.silvestre@aluno.ifsp.edu.br", "12345678")
-                .observe(MainActivity.this, new Observer<User>() {
-                    @Override
-                    public void onChanged(User user) {
-                        if(user == null){
-                            Toast.makeText(getApplicationContext(), "NÃO LOGOU",
-                                    Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(getApplicationContext(), user.getName() + " está Logado nessa porra",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
     }
 
     private ActivityHistory buildActivityHistory(String user_id){
@@ -168,10 +166,10 @@ public class MainActivity extends AppCompatActivity {
         atividade = atividades[aux];
 
         aux = gen.nextInt(10);
-        distance = aux*15.6;
+        distance = aux*1.58;
 
         aux = gen.nextInt(10);
-        duration = aux*3.14;
+        duration = aux*15.14;
 
         date = String.format("%d/%d/%d", gen.nextInt(30)+1, gen.nextInt(12)+1, 2022);
 
@@ -184,6 +182,27 @@ public class MainActivity extends AppCompatActivity {
         );
 
         return activityHistory;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userViewModel.isLogged().observe(this, new Observer<UserHasActivity>() {
+            @Override
+            public void onChanged(UserHasActivity usersActivitys) {
+                if(usersActivitys != null){
+                    txtLogin.setText(usersActivitys.getUser().getName());
+                    /*String perfilImage = PreferenceManager
+                            .getDefaultSharedPreferences(MainActivity.this)
+                            .getString(MediaStore.EXTRA_OUTPUT, null);
+                    if(perfilImage != null){
+                        imagePerfil.setImageURI(Uri.parse(perfilImage));
+                    }else{
+                        imagePerfil.setImageResource(R.drawable.profile_image);
+                    }*/
+                }
+            }
+        });
     }
 
     @Override
