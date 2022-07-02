@@ -20,12 +20,9 @@ public class User implements Serializable {
     private String bornDate;
     private String gender, phone, profileImage;
 
-    private int levelWalk, levelRun, levelCyclo, levelSwim;
-
     public User(
             String name, String email, String password, String bornDate,
-            String gender, String phone, String profileImage,
-            int levelWalk, int levelRun, int levelCyclo, int levelSwim) {
+            String gender, String phone, String profileImage) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.email =  email;
@@ -34,15 +31,11 @@ public class User implements Serializable {
         this.gender = gender;
         this.phone = phone;
         this.profileImage = profileImage;
-        this.levelWalk = levelWalk;
-        this.levelRun = levelRun;
-        this.levelCyclo = levelCyclo;
-        this.levelSwim = levelSwim;
     }
 
     @Ignore
     public User(){
-        this("", "", "", "", "", "", "", 0, 0, 0, 0);
+        this("", "", "", "", "", "", "");
     }
 
     @NonNull
@@ -108,54 +101,6 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getLevelWalk() {
-        return levelWalk;
-    }
-
-    public void setLevelWalk(int levelWalk) {
-        this.levelWalk = levelWalk;
-    }
-
-    public int getLevelRun() {
-        return levelRun;
-    }
-
-    public void setLevelRun(int levelRun) {
-        this.levelRun = levelRun;
-    }
-
-    public int getLevelCyclo() {
-        return levelCyclo;
-    }
-
-    public void setLevelCyclo(int levelCyclo) {
-        this.levelCyclo = levelCyclo;
-    }
-
-    public int getLevelSwim() {
-        return levelSwim;
-    }
-
-    public void setLevelSwim(int levelSwim) {
-        this.levelSwim = levelSwim;
-    }
-
-    public int getPointsWalk(){
-        return 0;
-    }
-
-    public int getPointsRun(){
-        return 0;
-    }
-
-    public int getPointsCyclo(){
-        return 0;
-    }
-
-    public int getPointsSwim(){
-        return 0;
     }
 
     @Override
