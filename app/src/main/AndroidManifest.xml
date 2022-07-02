@@ -13,6 +13,9 @@
             android:name=".activitys.StatisticActivity"
             android:exported="false" />
         <activity
+            android:name=".activitys.NewSportActivity"
+            android:exported="false" />
+        <activity
             android:name=".activitys.LoginActivity"
             android:exported="false" />
         <activity
