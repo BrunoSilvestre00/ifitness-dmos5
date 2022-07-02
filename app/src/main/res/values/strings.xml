@@ -13,6 +13,12 @@
     <!-- Tela Principal -->
     <string name="toogle_open">Open</string>
     <string name="toogle_close">Close</string>
+    <string name="enter">Entrar</string>
 
+    <array name="genders">
+        <item>Masculino</item>
+        <item>Feminino</item>
+        <item>Outro</item>
+    </array>
 
 </resources>

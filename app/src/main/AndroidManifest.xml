@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ifitnessdmos5">
         <activity
+            android:name=".activitys.StatisticActivity"
+            android:exported="false" />
+        <activity
             android:name=".activitys.LoginActivity"
             android:exported="false" />
         <activity
