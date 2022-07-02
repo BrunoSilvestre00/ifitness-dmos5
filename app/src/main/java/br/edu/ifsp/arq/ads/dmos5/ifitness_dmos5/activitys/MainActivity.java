@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.service.notification.NotificationListenerService;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,8 @@ import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.Atividades;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.User;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.UserHasActivity;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.viewmodel.UserViewModel;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -104,16 +107,11 @@ public class MainActivity extends AppCompatActivity {
                 userViewModel.isLogged().observe(MainActivity.this, new Observer<UserHasActivity>() {
                     @Override
                     public void onChanged(UserHasActivity usersActivitys) {
-                        Toast.makeText(MainActivity.this, usersActivitys.getUser().getName(), Toast.LENGTH_LONG).show();
-                        ActivityHistory activityHistory = new ActivityHistory(
-                                usersActivitys.getUser().getId(),
-                                Atividades.CAMINHADA,
-                                150,
-                                30,
-                                "27/06/2022"
-                        );
-                        usersActivitys.getActivitys().add(activityHistory);
-                        userViewModel.update(usersActivitys);
+                        /*ActivityHistory a = buildActivityHistory(usersActivitys.getUser().getId());
+                        Toast.makeText(MainActivity.this, a.toString(), Toast.LENGTH_LONG).show();
+                        usersActivitys.getActivitys().add(a);
+                        userViewModel.update(usersActivitys);*/
+                        Toast.makeText(MainActivity.this, String.format("Pontos: %d", usersActivitys.getLevelRun()), Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -121,22 +119,20 @@ public class MainActivity extends AppCompatActivity {
 
 
         /*User user = new User(
-                "Rodolffo Rodrigues",
-                "ro_ro@email.com",
-                "987654321",
-                "17/07/1998",
+                "Bruno Silvestre",
+                "bruno.silvestre@aluno.ifsp.edu.br",
+                "12345678",
+                "28/05/2002",
                 "male",
-                "(16) 99845-6512",
-                "",
-                2, 2, 1, 4
+                "(14) 98824-6613",
+                ""
         );
 
         userViewModel.createUser(user);*/
 
         userViewModel.logout();
 
-        //userViewModel.login("ro_ro@email.com", "987654321")
-        userViewModel.login("mary_silva@email.com", "123456")
+        userViewModel.login("bruno.silvestre@aluno.ifsp.edu.br", "12345678")
                 .observe(MainActivity.this, new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
@@ -149,6 +145,45 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+    }
+
+    private ActivityHistory buildActivityHistory(String user_id){
+        Random gen = new Random();
+
+        Atividades[] atividades = {
+                Atividades.CAMINHADA,
+                Atividades.CORRIDA,
+                Atividades.CICLISMO,
+                Atividades.NATACAO
+        };
+
+        Atividades atividade;
+        double distance, duration;
+        String date;
+
+        int aux;
+
+        aux = gen.nextInt(4);
+        atividade = atividades[aux];
+
+        aux = gen.nextInt(10);
+        distance = aux*15.6;
+
+        aux = gen.nextInt(10);
+        duration = aux*3.14;
+
+        date = String.format("%d/%d/%d", gen.nextInt(30)+1, gen.nextInt(12)+1, 2022);
+
+        ActivityHistory activityHistory = new ActivityHistory(
+                user_id,
+                atividade,
+                distance,
+                duration,
+                date
+        );
+
+        return activityHistory;
     }
 
     @Override

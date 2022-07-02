@@ -28,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.database.AppDatabase;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.database.UserDAO;
@@ -36,20 +37,13 @@ import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.User;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.UserHasActivity;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.viewmodel.UserViewModel;
 
-//import br.edu.ifsp.arq.dmos5.lojavirtualatletica.database.AppDatabase;
-//import br.edu.ifsp.arq.dmos5.lojavirtualatletica.database.UsuarioDao;
-//import br.edu.ifsp.arq.dmos5.lojavirtualatletica.model.Endereco;
-//import br.edu.ifsp.arq.dmos5.lojavirtualatletica.model.Usuario;
-//import br.edu.ifsp.arq.dmos5.lojavirtualatletica.model.UsuarioComEndereco;
-//import br.edu.ifsp.arq.dmos5.lojavirtualatletica.viewmodel.UsuarioViewModel;
-
 public class UsersRepository {
 
     private static final String BASE_URL = "https://identitytoolkit.googleapis.com/v1/";
     private static final String SIGNUP = "accounts:signUp";
     private static final String SIGNIN = "accounts:signInWithPassword";
     private static final String PASSWORD_RESET = "accounts:sendOobCode";
-    private static final String KEY = "?key=AIzaSyBJi-fFwm0EicBZjV7ODh9dO_sfRZ9dUzI";
+    private static final String KEY = "?key=AIzaSyBYrzMZXgK897oW7H6ugxuPRbbRCYT3J4w";
 
     private UserDAO dao;
 
@@ -88,6 +82,7 @@ public class UsersRepository {
                         try {
                             user.setId(response.getString("localId"));
                             user.setPassword(response.getString("idToken"));
+                            Log.d("SID", "from create "+response.getString("localId"));
 
                             firestore.collection("user")
                                     .document(user.getId()).set(user)
@@ -103,7 +98,7 @@ public class UsersRepository {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Deu pau esta merda", error.getMessage());
+                        Log.e("PAU", "Deu pau esta merda");
                     }
                 }
         );
@@ -218,17 +213,20 @@ public class UsersRepository {
 
         CollectionReference activityRef = userRef.collection("activity_history");
 
-        ActivityHistory activityHistory = userHasActivity.getActivitys().get(0);
+        List<ActivityHistory> activitysHistory = userHasActivity.getActivitys();
 
-        if(activityHistory.getId().isEmpty()){
-            activityRef.add(activityHistory).addOnSuccessListener( end ->{
-                activityHistory.setId(end.getId());
-                atualizado[0] = true;
-            });
-        }else{
-            activityRef.document(activityHistory.getId()).set(activityHistory).addOnSuccessListener(unused -> {
-                atualizado[0] = true;
-            });
+        for(ActivityHistory a : activitysHistory){
+            if(a.getId().isEmpty()){
+                activityRef.add(a).addOnSuccessListener( end ->{
+                    a.setId(end.getId());
+                    Log.d("SID", a.toString());
+                    atualizado[0] = true;
+                });
+            }else{
+                activityRef.document(a.getId()).set(a).addOnSuccessListener(unused -> {
+                    atualizado[0] = true;
+                });
+            }
         }
 
         return atualizado[0];

@@ -22,7 +22,7 @@ public class ActivityHistory implements Serializable {
     private String date;
 
     public ActivityHistory(String userID, Atividades type, double distance, double duration, String date) {
-        this.id = UUID.randomUUID().toString();
+        this.id = "";
         this.userID = userID;
         this.type = type;
         this.distance = distance;
@@ -95,5 +95,10 @@ public class ActivityHistory implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString(){
+        return String.format("%s - %s", this.getType(), this.getDate());
     }
 }
