@@ -80,22 +80,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <Spinner
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/txt_layoutprofile_sexo"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:hint="@string/singUp_sexo">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txt_edit_sexo"
-                android:inputType="textCapWords"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:id="@+id/sp_gender"
+            android:entries="@array/genders"
+            style="@style/Widget.AppCompat.Spinner.DropDown" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
@@ -133,7 +127,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_usuario_cadastrae"
+        android:id="@+id/btn_usuario_atualizar"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"

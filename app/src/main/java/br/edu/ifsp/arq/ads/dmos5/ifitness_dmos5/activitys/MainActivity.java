@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
+    private TextView txtTitulo;
     private TextView txtLogin;
 
     private UserViewModel userViewModel;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 R.string.toogle_close);
 
         drawerLayout.addDrawerListener(toggle);
+
 
         toggle.syncState();
 

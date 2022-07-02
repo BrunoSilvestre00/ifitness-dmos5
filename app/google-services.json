@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "305356650820",
-    "project_id": "lojavirtualatletica-duarte",
-    "storage_bucket": "lojavirtualatletica-duarte.appspot.com"
+    "project_number": "373050075994",
+    "project_id": "ifitness-dmos5",
+    "storage_bucket": "ifitness-dmos5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:305356650820:android:eadc9ca1621841daa63f11",
+        "mobilesdk_app_id": "1:373050075994:android:0e2010af273c8a307a6163",
         "android_client_info": {
-          "package_name": "br.edu.ifsp.arq.dmos5.lojavirtualatletica"
+          "package_name": "br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5"
         }
       },
       "oauth_client": [
         {
-          "client_id": "305356650820-4p4nr6edv4oqppt0r61djp9v1bfskj42.apps.googleusercontent.com",
+          "client_id": "373050075994-fl3e0kf8r855shmf300gctnon73q9o1g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBYrzMZXgK897oW7H6ugxuPRbbRCYT3J4w"
+          "current_key": "AIzaSyBJi-fFwm0EicBZjV7ODh9dO_sfRZ9dUzI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "305356650820-4p4nr6edv4oqppt0r61djp9v1bfskj42.apps.googleusercontent.com",
+              "client_id": "373050075994-fl3e0kf8r855shmf300gctnon73q9o1g.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
