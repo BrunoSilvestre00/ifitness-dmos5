@@ -48,22 +48,6 @@
             android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_layout_cadastrar_senha"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:hint="@string/singUp_senha">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txt_edit_cadastrar_senha"
-            android:inputType="textPassword"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -128,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_usuario_atualizar"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:text="Atualizar"

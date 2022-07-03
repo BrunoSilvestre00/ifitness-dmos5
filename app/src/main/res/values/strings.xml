@@ -21,4 +21,11 @@
         <item>Outro</item>
     </array>
 
+    <array name="activitys">
+        <item>Caminhada</item>
+        <item>Ciclismo</item>
+        <item>Corrida</item>
+        <item>Natação</item>
+    </array>
+
 </resources>

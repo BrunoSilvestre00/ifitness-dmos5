@@ -53,23 +53,20 @@ public class NewSportActivity extends AppCompatActivity {
 
         ActivityHistory activityHistory = new ActivityHistory(
                 "",
-               Atividades.values()[spnActivity.getSelectedItemPosition()],
+                Atividades.values()[spnActivity.getSelectedItemPosition()],
                 Double.parseDouble(txtDistance.getText().toString()),
                 Double.parseDouble(txtDuration.getText().toString()),
                 txtData.getText().toString()
-
-                );
+        );
 
         userViewModel.isLogged().observe(this, new Observer<UserHasActivity>() {
             @Override
             public void onChanged(UserHasActivity userHasActivity) {
-
                 activityHistory.setUserID(userHasActivity.getUser().getId());
                 userHasActivity.getActivitys().add(activityHistory);
                 userViewModel.update(userHasActivity);
                 Toast.makeText(NewSportActivity.this, "Atividade adicionada com sucesso!", Toast.LENGTH_SHORT).show();
                 finish();
-
             }
         });
 
@@ -77,7 +74,6 @@ public class NewSportActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sport);
 
@@ -86,5 +82,11 @@ public class NewSportActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
