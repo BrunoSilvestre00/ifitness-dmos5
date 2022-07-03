@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Intent intent = null;
+                Intent intent;
                 switch (item.getItemId()) {
                     case R.id.nav_home:
                         break;
@@ -85,11 +85,18 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_activity:
                         userViewModel.isLogged().observe(MainActivity.this, new Observer<UserHasActivity>() {
                             @Override
-                            public void onChanged(UserHasActivity userHasActivity) {
-                                userHasActivity.getActivitys()
-                                        .add(buildActivityHistory(userHasActivity
-                                                .getUser().getId()));
-                                userViewModel.update(userHasActivity);
+                            public void onChanged(UserHasActivity usersActivitys) {
+                                if(usersActivitys != null) {
+                                    Intent intent = new Intent(MainActivity.this, SportActivity.class);
+                                    intent.putExtra("user", usersActivitys);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(
+                                            MainActivity.this,
+                                            "Você precisa estar logado\npara acessar as suas Atividades",
+                                            Toast.LENGTH_LONG
+                                    ).show();
+                                }
                             }
                         });
                         break;
@@ -147,44 +154,6 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-    }
-
-    private ActivityHistory buildActivityHistory(String user_id){
-        Random gen = new Random();
-
-        Atividades[] atividades = {
-                Atividades.CAMINHADA,
-                Atividades.CORRIDA,
-                Atividades.CICLISMO,
-                Atividades.NATACAO
-        };
-
-        Atividades atividade;
-        double distance, duration;
-        String date;
-
-        int aux;
-
-        aux = gen.nextInt(4);
-        atividade = atividades[aux];
-
-        aux = gen.nextInt(10);
-        distance = aux*1.58;
-
-        aux = gen.nextInt(10);
-        duration = aux*15.14;
-
-        date = String.format("%d/%d/%d", gen.nextInt(30)+1, gen.nextInt(12)+1, 2022);
-
-        ActivityHistory activityHistory = new ActivityHistory(
-                user_id,
-                Atividades.CICLISMO,
-                80,
-                duration,
-                date
-        );
-
-        return activityHistory;
     }
 
     @Override
