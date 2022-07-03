@@ -10,13 +10,12 @@ import android.view.LayoutInflater;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.R;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.activitys.NewSportActivity;
+import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.activitys.SportActivity;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.ActivityHistory;
 
 public class ActivityAdapter extends ArrayAdapter<ActivityHistory> {
@@ -78,7 +77,8 @@ public class ActivityAdapter extends ArrayAdapter<ActivityHistory> {
         msgBox.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
+                SportActivity sa = (SportActivity) context;
+                sa.deleteActivity(pos);
             }
         });
 
