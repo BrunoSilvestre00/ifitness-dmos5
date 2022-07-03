@@ -6,35 +6,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.provider.MediaStore;
-import android.service.notification.NotificationListenerService;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.R;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.ActivityHistory;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.Atividades;
-import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.User;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.UserHasActivity;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.viewmodel.UserViewModel;
-
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView txtTitulo;
     private TextView txtLogin;
+
+    private TextView lblActivityType, lblActivityPts, lblActivityLevel;
+
+    private ListView lastActivitysList;
 
     private UserViewModel userViewModel;
 
@@ -59,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        txtTitulo = findViewById(R.id.toolbar_titulo);
+        txtTitulo.setText("Home");
+
+        lblActivityType = findViewById(R.id.lbl_activity_type);
+        lblActivityPts = findViewById(R.id.lbl_activity_pts);
+        lblActivityLevel = findViewById(R.id.lbl_activity_level);
+
         drawerLayout = findViewById(R.id.nav_drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
@@ -66,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 R.string.toogle_close);
 
         drawerLayout.addDrawerListener(toggle);
-
-
         toggle.syncState();
 
         navigationView = findViewById(R.id.nav_view);
@@ -125,6 +126,17 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_logout:
                         userViewModel.logout();
                         txtLogin.setText(R.string.enter);
+                        lastActivitysList = (ListView) findViewById(R.id.last_activity_list);
+                        ArrayAdapter<ActivityHistory> adapter = new ArrayAdapter<ActivityHistory>(
+                                MainActivity.this,
+                                android.R.layout.simple_list_item_1,
+                                new ArrayList<ActivityHistory>()
+                        );
+                        lastActivitysList.setAdapter(adapter);
+
+                        lblActivityType.setText("");
+                        lblActivityPts.setText("");
+                        lblActivityLevel.setText("");
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
@@ -164,14 +176,31 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(UserHasActivity usersActivitys) {
                 if(usersActivitys != null){
                     txtLogin.setText(usersActivitys.getUser().getName());
-                    /*String perfilImage = PreferenceManager
-                            .getDefaultSharedPreferences(MainActivity.this)
-                            .getString(MediaStore.EXTRA_OUTPUT, null);
-                    if(perfilImage != null){
-                        imagePerfil.setImageURI(Uri.parse(perfilImage));
-                    }else{
-                        imagePerfil.setImageResource(R.drawable.profile_image);
-                    }*/
+                    lastActivitysList = (ListView) findViewById(R.id.last_activity_list);
+                    ArrayAdapter<ActivityHistory> adapter = new ArrayAdapter<ActivityHistory>(
+                            MainActivity.this,
+                            android.R.layout.simple_list_item_1,
+                            usersActivitys.getActivitys().subList(0,5)
+                    );
+                    lastActivitysList.setAdapter(adapter);
+
+                    Atividades better = usersActivitys.getBetterActivity();
+
+                    lblActivityType.setText(better.toString());
+                    lblActivityPts.setText(String.format("%.0f pts", usersActivitys.getDistTotalActivity(better)));
+                    lblActivityLevel.setText(String.format("Nível %d", usersActivitys.getLevelActivity(better)));
+                } else{
+                    lastActivitysList = (ListView) findViewById(R.id.last_activity_list);
+                    ArrayAdapter<ActivityHistory> adapter = new ArrayAdapter<ActivityHistory>(
+                            MainActivity.this,
+                            android.R.layout.simple_list_item_1,
+                            new ArrayList<ActivityHistory>()
+                    );
+                    lastActivitysList.setAdapter(adapter);
+
+                    lblActivityType.setText("");
+                    lblActivityPts.setText("");
+                    lblActivityLevel.setText("");
                 }
             }
         });

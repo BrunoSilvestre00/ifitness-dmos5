@@ -1,5 +1,7 @@
 package br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -102,8 +104,13 @@ public class ActivityHistory implements Serializable {
         return Objects.hash(id);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public String toString(){
-        return String.format("%s - %s", this.getType(), this.getDate());
+        return String.format("\n%s - %s\nDistância: %.3f Km\nDuração: %.1f\n",
+                this.getType(),
+                this.getDate(),
+                this.getDistance(),
+                this.getDuration());
     }
 }

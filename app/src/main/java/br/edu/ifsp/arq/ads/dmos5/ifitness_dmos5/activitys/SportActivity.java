@@ -59,6 +59,7 @@ public class SportActivity extends AppCompatActivity {
 
     private void addActivity() {
         Intent intent = new Intent(SportActivity.this, NewSportActivity.class);
+        intent.putExtra("activity", new ActivityHistory());
         startActivity(intent);
     }
 

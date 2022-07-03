@@ -79,4 +79,17 @@ public class UserHasActivity implements Serializable {
                 return getLevel(Atividades.NATACAO, new int[]{0, 1, 2, 5, 10, 20});
         }
     }
+
+    public Atividades getBetterActivity(){
+        int better_pts = 0;
+        Atividades better = Atividades.CAMINHADA;
+        for(Atividades a : Atividades.values()){
+            int pts = (int) this.getDistTotalActivity(a);
+            if(pts > better_pts){
+                better = a;
+                better_pts = pts;
+            }
+        }
+        return better;
+    }
 }
