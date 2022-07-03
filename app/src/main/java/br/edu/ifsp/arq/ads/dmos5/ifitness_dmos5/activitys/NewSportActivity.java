@@ -26,12 +26,15 @@ public class NewSportActivity extends AppCompatActivity {
     private TextInputEditText txtData, txtDuration, txtDistance;
     private Spinner spnActivity;
     private Button btnSave;
-    private UserViewModel userViewModel;
 
+    private UserViewModel userViewModel;
+    private ActivityHistory activityHistory;
 
     private void createComponents(){
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        activityHistory = (ActivityHistory) getIntent()
+                .getExtras().getSerializable("activity");
 
         toolbar = findViewById(R.id.toolbar);
 
@@ -45,25 +48,55 @@ public class NewSportActivity extends AppCompatActivity {
         txtDistance = findViewById(R.id.txt_edit_distance);
 
         btnSave = findViewById(R.id.btn_atividade_add);
-        btnSave.setOnClickListener(view -> UpdateActivity());
+        btnSave.setOnClickListener(view -> updateActivity());
 
     }
 
-    private void UpdateActivity() {
+    private void fillFields(){
+        if(activityHistory == null)
+            return;
 
-        ActivityHistory activityHistory = new ActivityHistory(
-                "",
-                Atividades.values()[spnActivity.getSelectedItemPosition()],
-                Double.parseDouble(txtDistance.getText().toString()),
-                Double.parseDouble(txtDuration.getText().toString()),
-                txtData.getText().toString()
-        );
+        Atividades[] atividades = Atividades.values();
+        for (int i = 0; i < atividades.length; i++){
+            if(atividades[i].equals(activityHistory.getType())){
+                spnActivity.setSelection(i);
+            }
+        }
 
+        txtData.setText(activityHistory.getDate());
+        txtDistance.setText(String.valueOf(activityHistory.getDistance()));
+        txtDuration.setText(String.valueOf(activityHistory.getDuration()));
+    }
+
+    private void updateActivity() {
         userViewModel.isLogged().observe(this, new Observer<UserHasActivity>() {
             @Override
             public void onChanged(UserHasActivity userHasActivity) {
-                activityHistory.setUserID(userHasActivity.getUser().getId());
-                userHasActivity.getActivitys().add(activityHistory);
+                activityHistory = NewSportActivity.this.activityHistory;
+                boolean add = activityHistory == null;
+                if(add)
+                    activityHistory = new ActivityHistory(userHasActivity.getUser().getId());
+
+                activityHistory.setType(Atividades.values()[spnActivity.getSelectedItemPosition()]);
+                activityHistory.setDate(txtData.getText().toString());
+                activityHistory.setDistance(Double.parseDouble(txtDistance.getText().toString()));
+                activityHistory.setDuration(Double.parseDouble(txtDuration.getText().toString()));
+
+                if(add)
+                    userHasActivity.getActivitys().add(activityHistory);
+                else{
+                    for(int i = 0; i < userHasActivity.getActivitys().size(); i++){
+                        if(userHasActivity.getActivitys().get(i).getId().equals(activityHistory.getId())){
+                            userHasActivity.getActivitys().set(i, activityHistory);
+                            Toast.makeText(
+                                    NewSportActivity.this,
+                                    userHasActivity.getActivitys().toString(),
+                                    Toast.LENGTH_LONG).show();
+                            break;
+                        }
+                    }
+                }
+
                 userViewModel.update(userHasActivity);
                 Toast.makeText(NewSportActivity.this, "Atividade adicionada com sucesso!", Toast.LENGTH_SHORT).show();
                 finish();
@@ -78,6 +111,7 @@ public class NewSportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_sport);
 
         createComponents();
+        fillFields();
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

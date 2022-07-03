@@ -31,6 +31,11 @@ public class ActivityHistory implements Serializable {
     }
 
     @Ignore
+    public ActivityHistory(String userID){
+        this(userID, Atividades.CAMINHADA, 0, 0, "");
+    }
+
+    @Ignore
     public ActivityHistory(){
         this("", Atividades.CAMINHADA, 0, 0, "");
     }

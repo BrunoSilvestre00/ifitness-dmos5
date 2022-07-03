@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -20,6 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -231,6 +234,26 @@ public class UsersRepository {
         }
 
         return atualizado[0];
+    }
+
+    public void deleteActivity(ActivityHistory activityHistory){
+        DocumentReference userRef = firestore.collection("user")
+                .document(activityHistory.getUserID());
+        CollectionReference activityRef = userRef.collection("activity_history");
+        activityRef.document(activityHistory.getId())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("DELETE", "Atividade deletada!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("DELETE", "Erro na exclusão da atividade...", e);
+                    }
+                });
     }
 
     public void resetPassword(String email){

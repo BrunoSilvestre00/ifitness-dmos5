@@ -45,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         txtTelefone = findViewById(R.id.txt_edit_phone);
 
         btnUpdate = findViewById(R.id.btn_usuario_atualizar);
-        btnUpdate.setOnClickListener(view -> UpdateProfile());
+        btnUpdate.setOnClickListener(view -> updateProfile());
 
     }
 
@@ -83,7 +83,7 @@ public class ProfileActivity extends AppCompatActivity {
         return isValid;
     }
 
-    private void UpdateProfile(){
+    private void updateProfile(){
 
         if(!validate()){
             return;

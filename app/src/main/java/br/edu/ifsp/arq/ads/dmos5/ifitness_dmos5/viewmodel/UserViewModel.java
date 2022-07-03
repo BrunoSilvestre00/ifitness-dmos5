@@ -16,6 +16,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.Optional;
 
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.activitys.MainActivity;
+import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.ActivityHistory;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.User;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.UserHasActivity;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.repository.UsersRepository;
@@ -41,6 +42,10 @@ public class UserViewModel extends AndroidViewModel {
 
     public void update(UserHasActivity usersActivitys){
         usersRepository.update(usersActivitys);
+    }
+
+    public void deleteActivity(ActivityHistory activityHistory){
+        usersRepository.deleteActivity(activityHistory);
     }
 
     public LiveData<User> login(String email, String password) {
