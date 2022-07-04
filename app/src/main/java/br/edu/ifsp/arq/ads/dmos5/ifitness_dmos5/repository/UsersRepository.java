@@ -31,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.database.AppDatabase;
@@ -266,7 +267,6 @@ public class UsersRepository {
             e.printStackTrace();
         }
 
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, BASE_URL + PASSWORD_RESET + KEY, parametros,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -294,6 +294,32 @@ public class UsersRepository {
                 });
 
         queue.add(request);
+    }
+
+    public LiveData<List<UserHasActivity>> getAllUsers() {
+        MutableLiveData<List<UserHasActivity>> liveData = new MutableLiveData<>();
+        CollectionReference userCollection = firestore.collection("user");
+        userCollection.get().addOnCompleteListener(snapCollection -> {
+            List<UserHasActivity> list = new ArrayList<>();
+            snapCollection.getResult().forEach(docUser -> {
+                DocumentReference userRef = firestore.collection("user").document(docUser.getId());
+                UserHasActivity userHasActivity = new UserHasActivity();
+                userRef.get().addOnSuccessListener(snapshot -> {
+                    User user = snapshot.toObject(User.class);
+                    userHasActivity.setUser(user);
+                    userRef.collection("activity_history").get().addOnCompleteListener( snapActivity -> {
+                        snapActivity.getResult().forEach(docActivity -> {
+                            ActivityHistory activityHistory = docActivity.toObject(ActivityHistory.class);
+                            activityHistory.setId(docActivity.getId());
+                            userHasActivity.getActivitys().add(activityHistory);
+                        });
+                        list.add(userHasActivity);
+                        liveData.setValue(list);
+                    });
+                });
+            });
+        });
+        return  liveData;
     }
 }
 

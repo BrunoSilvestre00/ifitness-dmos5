@@ -1,13 +1,17 @@
 package br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model;
 
+import android.util.Log;
+
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class UserHasActivity implements Serializable {
+public class UserHasActivity implements Serializable, Comparable<UserHasActivity> {
 
     @Embedded
     private User user;
@@ -45,6 +49,7 @@ public class UserHasActivity implements Serializable {
                 distTotal += ah.getDistance();
             }
         }
+        Log.d("BETTER", String.format("%s - %.3f", user.getName(), distTotal));
         return distTotal;
     }
 
@@ -91,5 +96,24 @@ public class UserHasActivity implements Serializable {
             }
         }
         return better;
+    }
+
+    public int getAllPoints(){
+        double pts = 0;
+        for(ActivityHistory a : activitys){
+            pts += a.getDistance();
+        }
+        return (int) pts;
+    }
+
+    public int getBetterPoints(){
+        return getAllPoints();
+    }
+
+    @Override
+    public int compareTo(UserHasActivity obj) {
+        int thisPts = this.getBetterPoints();
+        int objPts = obj.getBetterPoints();
+        return Integer.compare(thisPts, objPts);
     }
 }

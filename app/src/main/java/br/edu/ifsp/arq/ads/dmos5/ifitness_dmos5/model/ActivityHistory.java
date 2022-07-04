@@ -8,12 +8,14 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity(tableName = "activity_history")
-public class ActivityHistory implements Serializable {
+public class ActivityHistory implements Serializable, Comparable<ActivityHistory> {
 
     @NonNull
     @PrimaryKey
@@ -112,5 +114,20 @@ public class ActivityHistory implements Serializable {
                 this.getDate(),
                 this.getDistance(),
                 this.getDuration());
+    }
+
+    @Override
+    public int compareTo(ActivityHistory obj) {
+        try {
+            Date thisDate = new SimpleDateFormat("dd/MM/yyyy").parse(this.getDate());
+            Date objDate = new SimpleDateFormat("dd/MM/yyyy").parse(obj.getDate());
+            if (thisDate == null || objDate == null) {
+                return 0;
+            }
+            return thisDate.compareTo(objDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

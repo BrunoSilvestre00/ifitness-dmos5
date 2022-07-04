@@ -9,8 +9,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,7 +22,11 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.net.Inet4Address;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.R;
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model.ActivityHistory;
@@ -120,8 +126,22 @@ public class MainActivity extends AppCompatActivity {
                         });
                         break;
                     case R.id.nav_ranking:
-                        intent = new Intent(MainActivity.this, RankingActivity.class);
-                        startActivity(intent);
+                        userViewModel.getAllUsers().observe(MainActivity.this, new Observer<List<UserHasActivity>>() {
+                            @SuppressLint("DefaultLocale")
+                            @Override
+                            public void onChanged(List<UserHasActivity> listUser) {
+                                if(listUser.size() >= 5){
+                                    Collections.sort(listUser);
+                                    Collections.reverse(listUser);
+                                    Intent intent = new Intent(MainActivity.this, RankingActivity.class);
+                                    for(int i = 0; i < 5; i++){
+                                        intent.putExtra(String.format("user_%d", i+1), listUser.get(i).getUser().getName());
+                                        intent.putExtra(String.format("pts_%d", i+1), listUser.get(i).getBetterPoints());
+                                    }
+                                    startActivity(intent);
+                                }
+                            }
+                        });
                         break;
                     case R.id.nav_logout:
                         userViewModel.logout();
@@ -177,10 +197,13 @@ public class MainActivity extends AppCompatActivity {
                 if(usersActivitys != null){
                     txtLogin.setText(usersActivitys.getUser().getName());
                     lastActivitysList = (ListView) findViewById(R.id.last_activity_list);
+
+                    List<ActivityHistory> atividades = usersActivitys.getActivitys();
+
                     ArrayAdapter<ActivityHistory> adapter = new ArrayAdapter<ActivityHistory>(
                             MainActivity.this,
                             android.R.layout.simple_list_item_1,
-                            usersActivitys.getActivitys().subList(0,5)
+                            atividades.subList(0, Math.min(atividades.size(), 5))
                     );
                     lastActivitysList.setAdapter(adapter);
 
