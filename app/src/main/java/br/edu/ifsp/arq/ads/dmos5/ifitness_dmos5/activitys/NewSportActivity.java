@@ -53,7 +53,7 @@ public class NewSportActivity extends AppCompatActivity {
     }
 
     private void fillFields(){
-        if(activityHistory == null)
+        if(activityHistory.getUserID().isEmpty())
             return;
 
         Atividades[] atividades = Atividades.values();
@@ -72,8 +72,7 @@ public class NewSportActivity extends AppCompatActivity {
         userViewModel.isLogged().observe(this, new Observer<UserHasActivity>() {
             @Override
             public void onChanged(UserHasActivity userHasActivity) {
-                activityHistory = NewSportActivity.this.activityHistory;
-                boolean add = activityHistory == null;
+                boolean add = activityHistory.getUserID().isEmpty();
                 if(add)
                     activityHistory = new ActivityHistory(userHasActivity.getUser().getId());
 
@@ -88,10 +87,6 @@ public class NewSportActivity extends AppCompatActivity {
                     for(int i = 0; i < userHasActivity.getActivitys().size(); i++){
                         if(userHasActivity.getActivitys().get(i).getId().equals(activityHistory.getId())){
                             userHasActivity.getActivitys().set(i, activityHistory);
-                            Toast.makeText(
-                                    NewSportActivity.this,
-                                    userHasActivity.getActivitys().toString(),
-                                    Toast.LENGTH_LONG).show();
                             break;
                         }
                     }

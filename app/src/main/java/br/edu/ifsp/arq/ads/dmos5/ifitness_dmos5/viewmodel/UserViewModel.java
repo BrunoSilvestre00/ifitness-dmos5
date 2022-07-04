@@ -13,6 +13,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.List;
 import java.util.Optional;
 
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.activitys.MainActivity;
@@ -63,6 +64,10 @@ public class UserViewModel extends AndroidViewModel {
         }
         Log.d("SID", "from isLogged "+ sid);
         return usersRepository.load(sid);
+    }
+
+    public LiveData<List<UserHasActivity>> getAllUsers(){
+        return usersRepository.getAllUsers();
     }
 
     public void resetPassword(String email) {

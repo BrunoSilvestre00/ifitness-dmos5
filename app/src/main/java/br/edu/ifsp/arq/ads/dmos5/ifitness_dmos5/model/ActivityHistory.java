@@ -1,17 +1,21 @@
 package br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.model;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity(tableName = "activity_history")
-public class ActivityHistory implements Serializable {
+public class ActivityHistory implements Serializable, Comparable<ActivityHistory> {
 
     @NonNull
     @PrimaryKey
@@ -102,8 +106,28 @@ public class ActivityHistory implements Serializable {
         return Objects.hash(id);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public String toString(){
-        return String.format("%s - %s", this.getType(), this.getDate());
+        return String.format("\n%s - %s\nDistância: %.3f Km\nDuração: %.1f\n",
+                this.getType(),
+                this.getDate(),
+                this.getDistance(),
+                this.getDuration());
+    }
+
+    @Override
+    public int compareTo(ActivityHistory obj) {
+        try {
+            Date thisDate = new SimpleDateFormat("dd/MM/yyyy").parse(this.getDate());
+            Date objDate = new SimpleDateFormat("dd/MM/yyyy").parse(obj.getDate());
+            if (thisDate == null || objDate == null) {
+                return 0;
+            }
+            return thisDate.compareTo(objDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

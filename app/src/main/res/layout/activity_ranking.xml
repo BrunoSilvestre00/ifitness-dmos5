@@ -18,11 +18,349 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ListView
-        android:id="@+id/list"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="1dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/border_circular">
+
+        <ImageView
+            android:id="@+id/medal_1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginVertical="5dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/medal_1" />
+
+
+        <TextView
+            android:id="@+id/txt_name_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/medal_1"
+            android:layout_weight="2"
+            android:ellipsize="marquee"
+            android:text="Nome:"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_name_user_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/txt_name_1"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/txt_name_1"
+            android:text="xxxx"
+            android:textSize="23dp" />
+
+        <TextView
+            android:id="@+id/txt_point_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_name_1"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/medal_1"
+            android:layout_weight="2"
+            android:ellipsize="marquee"
+            android:text="Pontos:"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_point_user_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/txt_point_1"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/txt_point_1"
+            android:text="xxxx"
+            android:textSize="23dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/border_circular">
+
+        <ImageView
+            android:id="@+id/medal_2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/medal_2" />
+
+
+        <TextView
+            android:id="@+id/txt_name_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/medal_2"
+            android:layout_weight="2"
+            android:ellipsize="marquee"
+            android:text="Nome:"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_name_user_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/txt_name_2"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/txt_name_2"
+            android:text="xxxx"
+            android:textSize="23dp" />
+
+        <TextView
+            android:id="@+id/txt_point_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_name_2"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/medal_2"
+            android:layout_weight="2"
+            android:ellipsize="marquee"
+            android:text="Pontos:"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_point_user_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/txt_point_2"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/txt_point_2"
+            android:text="xxxx"
+            android:textSize="23dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/border_circular">
+
+        <ImageView
+            android:id="@+id/medal_3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/medal_3" />
+
+
+        <TextView
+            android:id="@+id/txt_name_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/medal_3"
+            android:layout_weight="2"
+            android:ellipsize="marquee"
+            android:text="Nome:"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_name_user_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/txt_name_3"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/txt_name_3"
+            android:text="xxxx"
+            android:textSize="23dp" />
+
+        <TextView
+            android:id="@+id/txt_point_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_name_3"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/medal_3"
+            android:layout_weight="2"
+            android:ellipsize="marquee"
+            android:text="Pontos:"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_point_user_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/txt_point_3"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/txt_point_3"
+            android:text="xxxx"
+            android:textSize="23dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/border_circular">
+
+        <ImageView
+            android:id="@+id/medal_4"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/medal_4" />
+
+        <TextView
+            android:id="@+id/txt_name_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/medal_4"
+            android:layout_weight="2"
+            android:ellipsize="marquee"
+            android:text="Nome:"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_name_user_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/txt_name_4"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/txt_name_4"
+            android:text="xxxx"
+            android:textSize="23dp" />
+
+        <TextView
+            android:id="@+id/txt_point_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_name_4"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/medal_4"
+            android:layout_weight="2"
+            android:ellipsize="marquee"
+            android:text="Pontos:"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_point_user_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/txt_point_4"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/txt_point_4"
+            android:text="xxxx"
+            android:textSize="23dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/border_circular">
+
+        <ImageView
+            android:id="@+id/medal_5"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/medal_5" />
+
+
+        <TextView
+            android:id="@+id/txt_name_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/medal_5"
+            android:layout_weight="2"
+            android:ellipsize="marquee"
+            android:text="Nome:"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_name_user_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/txt_name_5"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/txt_name_5"
+            android:text="xxxx"
+            android:textSize="23dp" />
+
+        <TextView
+            android:id="@+id/txt_point_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_name_5"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/medal_5"
+            android:layout_weight="2"
+            android:ellipsize="marquee"
+            android:text="Pontos:"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_point_user_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/txt_point_5"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/txt_point_5"
+            android:text="xxxx"
+            android:textSize="23dp" />
+
+
+    </RelativeLayout>
+
 
 
 </LinearLayout>

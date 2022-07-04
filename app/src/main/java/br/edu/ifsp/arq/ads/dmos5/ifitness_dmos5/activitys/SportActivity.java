@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Collections;
 import java.util.List;
 
 import br.edu.ifsp.arq.ads.dmos5.ifitness_dmos5.R;
@@ -52,6 +53,9 @@ public class SportActivity extends AppCompatActivity {
     }
 
     public void handleAdapter(List<ActivityHistory> listActivitys){
+        Collections.sort(listActivitys);
+        Collections.reverse(listActivitys);
+
         adapter = new ActivityAdapter(SportActivity.this, android.R.layout.simple_list_item_1, listActivitys);
         activitysList = (ListView) findViewById(R.id.activity_list);
         activitysList.setAdapter(adapter);
@@ -59,6 +63,7 @@ public class SportActivity extends AppCompatActivity {
 
     private void addActivity() {
         Intent intent = new Intent(SportActivity.this, NewSportActivity.class);
+        intent.putExtra("activity", new ActivityHistory());
         startActivity(intent);
     }
 

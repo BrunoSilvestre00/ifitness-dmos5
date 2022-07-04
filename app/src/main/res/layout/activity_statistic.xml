@@ -53,6 +53,7 @@
         android:layout_height="0dp"
         android:layout_weight="3"
         android:layout_margin="25dp"
+        android:layout_marginBottom="0dp"
         android:padding="20dp"
         android:orientation="vertical"
         android:background="@drawable/border_circular">
@@ -98,17 +99,16 @@
             android:textSize="20dp"
             android:text="Pontuação: xx pts"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_usuario_entrar"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:text="Ranking Atividade"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton" />
-
-
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_usuario_entrar"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginVertical="20dp"
+        android:text="Ranking dos Usuários"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton" />
 
 </LinearLayout>
