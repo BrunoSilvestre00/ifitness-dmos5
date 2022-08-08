@@ -12,7 +12,7 @@ Este aplicativo android tem como intuito de gerenciar a realização das seguint
 Além disso apresenta um recurso de gamificação para que incetive os usuários à prática de atividades físicas.
 <br><br>
 <p><a href='https://docs.google.com/spreadsheets/d/1oVKVl5MsxEJQIeh7P2Bh6z_H6hNPRd6uNqR1eyzkZ38/edit?usp=sharing' target='_blank'>
-  Gerenciamento de atividades do projeto
+  Gerenciamento das atividades do projeto
 </a></p>
 
 
