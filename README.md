@@ -1,6 +1,6 @@
 # ifitness-dmos5
 
-<h1> Projeto Final de DMOS5 - Bianca Seolin</span> e Bruno Silvestre. </h1>
+<h1> Projeto Final de DMOS5 - Bianca Seolin</span> e Bruno Silvestre</h1>
 
 Este aplicativo android tem como intuito de gerenciar a realização das seguintes atividades pelo usuário: 
 <ul>
